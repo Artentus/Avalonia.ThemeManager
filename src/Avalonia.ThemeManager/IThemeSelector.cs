@@ -2,18 +2,17 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System.Collections.Generic;
 using Avalonia.Controls;
+using ReactiveUI;
 
 namespace Avalonia.ThemeManager
 {
-    public interface IThemeSelector
+    public interface IThemeSelector : ICollection<ITheme>
     {
         ITheme? SelectedTheme { get; set; }
-        IList<ITheme>? Themes { get; set; }
-        IList<Window>? Windows { get; set; }
-        ITheme LoadTheme(string file);
+        IReadOnlyList<Window> Windows { get; }
         void EnableThemes(Window window);
-        void ApplyTheme(ITheme theme);
-        void LoadSelectedTheme(string file);
-        void SaveSelectedTheme(string file);
+        bool DisableThemes(Window window);
+        bool SelectTheme(string name);
+        ReactiveCommand<string, bool> SelectThemeCommand { get; }
     }
 }

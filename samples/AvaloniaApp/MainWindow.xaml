@@ -11,15 +11,15 @@
     <Grid RowDefinitions="Auto,*">
         <Menu Grid.Row="0">
             <MenuItem Header="_View">
-                <MenuItem Header="_Theme" Items="{Binding Themes}">
+                <MenuItem Name="ThemeParent" Header="_Theme" Items="{Binding}">
                     <MenuItem.Styles>
-                        <Style Selector="MenuItem">
+                        <Style Selector="MenuItem#ThemeParent > MenuItem">
                             <Setter Property="Header" Value="{Binding Name}"/>
-                            <Setter Property="Command" Value="{Binding ApplyTheme}"/>
-                            <Setter Property="CommandParameter" Value="{Binding}"/>
+                            <!--<Setter Property="Command" Value="{Binding SelectThemeCommand}"/>-->
+                            <Setter Property="CommandParameter" Value="{Binding Name}"/>
                             <Setter Property="Icon">
                                 <Template>
-                                    <CheckBox>
+                                    <CheckBox BorderThickness="0">
                                         <CheckBox.IsChecked>
                                             <MultiBinding Mode="OneWay" Converter="{StaticResource ObjectEqualityMultiConverter}">
                                                 <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>
